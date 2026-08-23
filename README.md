@@ -25,13 +25,57 @@ Third-party source and test-vector provenance is recorded in
 
 The 34-entry regression matrix completed **34/34 PASS** on 2026-08-17 in 126.29 seconds. Its accurate backend accounting is **29 direct-hardware entries**, four host/NPU composer entries (M32e, M33d, M33e Sign, and M33e Verify), and one intentional CPU reference entry (M12). M33a and M33b are native, fail-closed silicon gates; the higher-level composers dispatch those primitives from Python and are not fully device-resident. See the [`M33 validation record`](docs/M33_SILICON_VALIDATION_20260817.md), [`v1.0.0 validation errata`](docs/V1_0_0_VALIDATION_ERRATA.md), and [`PQC status summary`](docs/PQC_COMPLETE_V1.md). New-user path: clone the repository, then run `py .\install`; a successful install automatically invokes the canonical regression runner.
 
-[Install](#installation) • [Architecture](#1-system--hardware-architecture) • [Directory Structure](#2-repository-structure) • [Validation Matrix](#3-validation-matrix) • [I/Q Throughput](#iq-throughput) • [Engineering Issues & Fixes](#4-engineering-challenges--technical-solutions) • [Quickstart](#5-quickstart--silicon-verification) • [References](#6-references--upstream-projects) • [Credits](#7-credits--acknowledgments)  • [Documentation](docs/README.md) • [Publication readiness](docs/PUBLICATION_READINESS.md)
+[Web App Quickstart](#-running-the-interactive-web-application) • [Native Silicon Install](#-running-on-native-amd-ryzen-ai-silicon) • [Architecture](#1-system--hardware-architecture) • [Directory Structure](#2-repository-structure) • [Validation Matrix](#3-validation-matrix) • [I/Q Throughput](#iq-throughput) • [Web Application vs Silicon Corpus](#-architecture-enhancements-web-studio-vs-original-silicon-corpus) • [Engineering Issues & Fixes](#4-engineering-challenges--technical-solutions) • [Quickstart](#5-quickstart--silicon-verification) • [References & Repositories](#6-references-upstream-projects--third-party-repositories) • [Citation](#8-citation) • [Credits](#7-credits--acknowledgments) • [Documentation](docs/README.md) • [Publication readiness](docs/PUBLICATION_READINESS.md)
 
 </div>
 
 ---
 
-## Installation
+## 🚀 Running the Interactive Web Application
+
+The project includes an interactive, browser-based DSP & Silicon Visualization Studio featuring real-time signal processing, 3GPP TS 38.104 EVM constellation slicing, Radix-4 Stockham FFT spectrum analyzer, NIST FIPS 203/204 PQC cryptography engine, and the 34-gate silicon regression test runner.
+
+### Prerequisites for Web App
+- **Node.js**: `v18.0.0` or higher
+- **npm** / **yarn** / **pnpm** / **bun**
+
+### 1. Install Dependencies
+```bash
+npm install
+```
+
+### 2. Start Development Server
+```bash
+npm run dev
+```
+The interactive application will be available at `http://localhost:3000`.
+
+### 3. Production Build & Linting
+```bash
+# Type check and lint codebase
+npm run lint
+
+# Build production bundle (outputs to /dist)
+npm run build
+
+# Preview production build locally
+npm run preview
+```
+
+### Studio Features & Modules
+| View / Tab | Capabilities |
+| :--- | :--- |
+| **Silicon Regression Runner** | Interactive 34-gate test execution harness mirroring the hardware validation suite (29 AIE2 kernels, 4 PQC composers, 1 CPU reference) with pass/fail telemetry, execution duration, and Markdown/JSON export. |
+| **SDR Signal Pipeline** | Live multi-stage heterodyne receiver (Mixer $\to$ Kaiser LPF DDC $\to$ Barker-13 Matched Filter $\to$ Costas Loop) with real-time waveform inspection, tone synthesis, AWGN noise, and Doppler offset. |
+| **Constellation & EVM Analyzer** | Real-time I/Q constellation analyzer for BPSK, QPSK, 16-QAM, and 64-QAM with Gardner TED, Costas carrier phase recovery, Gray code slicing, SNR injection, phase jitter, and 3GPP TS 38.104 EVM metrics. |
+| **Spectrum & Waterfall Analyzer** | Radix-4 Stockham FFT power spectral density (PSD) with selectable windowing (Kaiser $\beta=5.65$, Hamming, Hann, Blackman) and a continuous scrolling 2D waterfall spectrogram. |
+| **Post-Quantum Cryptography** | NIST FIPS 203 ML-KEM-768 key encapsulation and NIST FIPS 204 ML-DSA-65 digital signature creation, polynomial hint verification, and tamper detection gating. |
+| **FIR Filter & Polyphase Lab** | Kaiser-windowed low-pass FIR filter design with frequency response $|H(f)|$, impulse response $h[n]$, and SIMD polyphase sub-filter commutator matrix mapping. |
+| **AIE2 Architecture Explorer** | Visual 4-column $\times$ 5-row tile matrix inspector showing memory allocation, vector SIMD registers, DMA channels, and ObjectFIFO dataflow topologies. |
+
+---
+
+## ⚡ Running on Native AMD Ryzen AI Silicon
 
 A new Windows 11 machine with a Phoenix / Hawk Point NPU only needs a clone of this repository. The extensionless, stdlib-only `install` launcher wraps the official Xilinx / AMD native-Windows stack:
 
@@ -301,14 +345,55 @@ During development on native Windows 11 with the AMD IRON/AIE2 toolchain, severa
 
 ## 5. Quickstart & Silicon Verification
 
-The [Installation](#installation) command already runs the canonical regression
-after a successful install. To rerun it later from the clone:
+### Running the Full Master Regression Suite (34 Gates)
+
+The [Installation](#-running-on-native-amd-ryzen-ai-silicon) command already runs the canonical regression after a successful install. To rerun the full 34-test regression sweep anytime from PowerShell:
 
 ```powershell
 py .\run_all_silicon_tests.py
 ```
 
-Expected output (mlir-aie v1.4.1 pin `3ca0193`, cached xclbin):
+### Running Individual Milestones
+
+You can test individual DSP kernels, channelizers, and cryptographic modules directly:
+
+```powershell
+# Activate local iron environment (first time in a shell session)
+.\scripts\activate_ironenv.ps1
+
+# Milestone 3: Single-Core SAXPY Vector Operation
+python tests\m3_saxpy\test_saxpy.py
+
+# Milestone 6: Complex Mixer / NCO Downconverter
+python tests\m6_mixer\test_mixer.py
+
+# Milestone 17: 64-Point Radix-4 Stockham FFT + IFFT
+python tests\m17_radix2_fft\test_fft.py
+
+# Milestone 17p: 4-Column Parallel FFT Channelizer
+python tests\m17p_fft_parallel\test_fft_parallel.py
+
+# Milestone 21: Fused Digital Down-Converter (DDC)
+python tests\m21_ddc\test_ddc.py
+
+# Milestone 24: Barker-13 Matched-Filter Correlator
+python tests\m24_barker13\test_barker13.py
+
+# Milestone 25: Fused BPSK / QPSK Receiver & Costas Loop
+python tests\m25_costas\test_costas.py
+
+# Milestone 32: NIST FIPS 203 ML-KEM-512 / ML-KEM-768 Suite
+python tests\m32_mlkem\test_m32e_composer.py
+
+# Milestone 33: NIST FIPS 204 ML-DSA-44 / ML-DSA-65 / ML-DSA-87 Suite
+python tests\m33_mldsa\test_m33a_ntt.py
+python tests\m33_mldsa\test_m33b_rounding.py
+python tests\m33_mldsa\test_m33d_keygen.py
+python tests\m33_mldsa\test_m33e_sign.py
+python tests\m33_mldsa\test_m33e_verify.py
+```
+
+Expected output for full master regression suite (mlir-aie v1.4.1 pin `3ca0193`, cached xclbin):
 ```text
 ======================================================================
                      REGRESSION EXECUTION SUMMARY
@@ -346,50 +431,112 @@ Expected on Phoenix NPU1: first-buffer $L_\infty = 0.007812$, then ~7.5 Msps / ~
 
 ---
 
-## 6. References & Upstream Projects
+## 🔬 Architecture Enhancements: Web Studio vs Original Silicon Corpus
 
-- [Cooley & Tukey (1965), "An algorithm for the machine calculation of complex Fourier series"](https://garfield.library.upenn.edu/classics1993/A1993MJ84400001.pdf): the original radix-2 FFT paper underlying M16/M17.
-- [Barrett (1986), "Implementing the Rivest Shamir and Adleman Public Key Encryption Algorithm on a Standard Digital Signal Processor"](https://link.springer.com/chapter/10.1007/3-540-47721-7_24): Barrett reduction, used in M10–M15b modular arithmetic.
-- [NIST FIPS 203](https://nvlpubs.nist.gov/nistpubs/fips/nist.fips.203.pdf) ([DOI](https://doi.org/10.6028/NIST.FIPS.203)): ML-KEM ring `Z_q[X]/(X^n+1)` with `(n, q) = (256, 3329)`. Closed at v1.0.0 via M32b/c/d/e.
-- [NIST FIPS 204](https://nvlpubs.nist.gov/nistpubs/fips/nist.fips.204.pdf) ([DOI](https://doi.org/10.6028/NIST.FIPS.204)): ML-DSA ring `Z_q[X]/(X^n+1)` with `(n, q) = (256, 8380417)`. Closed at v1.0.0 via M33a/b/d/e.
-- [NIST FIPS 202](https://nvlpubs.nist.gov/nistpubs/fips/nist.fips.202.pdf): SHA3-256, SHA3-512, SHAKE128, SHAKE256 used by FIPS 203 §4.1 and FIPS 204 §3.3.5.
-- [CRYSTALS-Dilithium specification v3.1](https://pq-crystals.org/dilithium/data/dilithium-specification-round3-20210208.pdf): round-3 Dilithium reference underlying FIPS 204.
-- [`kyber-py` 1.0.1](https://github.com/GiacomoPope/kyber-py) and [`dilithium-py` 1.4.0](https://github.com/GiacomoPope/dilithium-py): Python reference oracles for M32e and M33d / M33e.
-- [NIST ACVP-Server](https://github.com/usnistgov/ACVP-Server): official ML-KEM and ML-DSA KAT vectors vendored under `tests/m32_mlkem/vectors/` and `tests/m33_mldsa/vectors/`.
-- [pq-crystals reference implementations](https://github.com/pq-crystals): official Kyber and Dilithium C reference sources cited by M32b and M33a.
-- [NIST PQC project](https://csrc.nist.gov/projects/post-quantum-cryptography) and [CAVP](https://csrc.nist.gov/projects/cryptographic-algorithm-validation-program).
-- [CRYSTALS-Kyber specification v3.02](https://pq-crystals.org/kyber/data/kyber-specification-round3-20210804.pdf): Kyber NTT and negacyclic ring.
-- [Isabelle/AFP CRYSTALS-Kyber](https://isa-afp.org/browser_info/current/AFP/CRYSTALS-Kyber/outline.pdf): formalization of `Z_q[x]/(x^N+1)`.
-- [Stockham (1966), "High-speed convolution and correlation"](https://dl.acm.org/doi/10.1145/1464182.1464209): auto-sort FFT used by M17.
-- [Gentleman & Sande (1966)](https://dl.acm.org/doi/10.1145/1464291.1464352): DIF FFT / Gentleman–Sande butterfly.
-- [Ozaki et al. (2012)](https://doi.org/10.1007/s11075-011-9478-1): error-free split used by the AMD FFT_R4_AIE twiddle path.
-- [Higham (2002), *Accuracy and Stability of Numerical Algorithms*](https://doi.org/10.1137/1.9780898718027): FFT round-off bounds cited by M16.
-- [Linux kernel, AMD NPU / `amdxdna`](https://docs.kernel.org/accel/amdxdna/amdnpu.html): Phoenix 4×5 XDNA1 topology.
-- [Native Windows IRON guide, mlir-aie 1.4.1](https://xilinx.github.io/mlir-aie/1.4.1/buildHostWinNative/).
-- [Xilinx / AMD MLIR-AIE](https://github.com/Xilinx/mlir-aie): AI Engine MLIR dialect and LLVM backend (pinned at commit [`3ca0193`](https://github.com/Xilinx/mlir-aie/commit/3ca0193cea9e2c39ec670a65f93e1dd43c969f22), [v1.4.1](https://github.com/Xilinx/mlir-aie/releases/tag/v1.4.1) + 13 commits, [PR #3545](https://github.com/Xilinx/mlir-aie/pull/3545)).
-- [AMD FFT_R4_AIE](https://github.com/diacccc/FFT_R4_AIE): Apache-2.0-licensed radix-4 Stockham FFT reference kernel for AIE-ML. `kernels/fft_stockham_f32.cc` is adapted from this source with attribution preserved.
-- [Xilinx aie-rt](https://github.com/Xilinx/aie-rt): AI Engine runtime library and `aie_api` header source (`fft_dit_r2_stage`, `mmul`, `filter_even/odd`).
-- [AMD Ryzen 9 7940HS](https://www.amd.com/en/products/processors/laptop/ryzen/7000-series/amd-ryzen-9-7940hs.html): official product page; Phoenix NPU rated up to 10 TOPS.
-- [Tom's Hardware, Hawk Point announcement](https://www.tomshardware.com/pc-components/cpus/the-refresh-that-wasnt-amd-announces-hawk-point-ryzen-8040-series-with-zen-4-rdna3-and-xdna-teases-strix-point): AMD states XDNA1 delivers 10 TOPS INT8 on Phoenix 7040.
-- [AMD XDNA Driver](https://github.com/amd/xdna-driver): Linux and Windows kernel driver for AMD XDNA architecture.
-- [Peano LLVM-AIE Compiler](https://github.com/Xilinx/llvm-aie): Clang/LLVM fork targeting AIE/AIE2 vector units.
-- [AMD XRT (Xilinx Runtime)](https://github.com/Xilinx/XRT): Host runtime for PCIe and APU accelerator device management.
-- [NTT on AMD AI Engine](https://github.com/hal-lab-u-tokyo/ntt-aie): NTT reference implementation on AI Engine architectures.
+This repository integrates the original [midhatn/phoenix-sdr-dsp](https://github.com/midhatn/phoenix-sdr-dsp) native silicon and MLIR-AIE corpus with a browser-accessible, real-time engineering studio:
+
+```
+┌─────────────────────────────────────────────────────────────────────────────────────────────┐
+│                             PHOENIX SDR-DSP ARCHITECTURE ECOSYSTEM                          │
+├─────────────────────────────────────────────────────────┬───────────────────────────────────┤
+│    Original Native Corpus (midhatn/phoenix-sdr-dsp)     │   Web Studio & Visual Workbench   │
+├─────────────────────────────────────────────────────────┼───────────────────────────────────┤
+│ • Native C++ AIE2 Vector Kernels (kernels/*.cc)        │ • TypeScript / React 18 UI        │
+│ • MLIR-AIE / IRON Dataflow Graphs & ObjectFIFOs         │ • In-Browser DSP & FFT Pipeline   │
+│ • Windows 11 XRT & pyxrt Driver Interface               │ • 34/34 Test Regression Simulator │
+│ • LLVM Peano AIE2 Vector Assembler                      │ • Real-Time Constellation / EVM   │
+│ • 34-Gate Python Silicon Regression Suite               │ • FIPS 203/204 PQC Simulator      │
+│ • Pinned Toolchains (XRT 2.21, MLIR-AIE 1.4.1)          │ • 2D Waterfall & Spectrum Analyzer│
+└─────────────────────────────────────────────────────────┴───────────────────────────────────┘
+```
+
+### Key Enhancements & Differences:
+
+1. **Interactive Web Simulation & Live Visualization**:
+   - **Original Repo**: Command-line based (`run_all_silicon_tests.py` and PowerShell scripts) requiring physical AMD Phoenix / Hawk Point APU hardware (Ryzen 9 7940HS / 8040 series) running Windows 11 with XRT drivers.
+   - **Enhanced Web Studio**: Implements a high-precision TypeScript mirror of the DSP algorithms and NTT/PQC mathematical primitives in the browser. Developers without physical AMD silicon can interactively inspect, benchmark, and visualize every stage of the pipeline on any OS (Linux, macOS, Windows).
+
+2. **Real-Time Instrumentation & Visual Workbenches**:
+   - **SDR Pipeline Inspector**: Live visual inspection of heterodyne mixer downconversion, Kaiser-windowed DDC filtering, Barker-13 matched filter correlation, and Costas carrier demodulation.
+   - **3GPP TS 38.104 Constellation & EVM Analyzer**: Dynamic constellation visualizer for BPSK, QPSK, 16-QAM, and 64-QAM with simulated RF impairments (SNR, phase error $\Delta\theta$, amplitude imbalance) and real-time RMS/Peak EVM calculation.
+   - **Radix-4 Stockham Spectrum & Waterfall**: Live Power Spectral Density (PSD) display with real-time scrolling 2D spectrogram history and peak carrier frequency tracking.
+   - **NIST FIPS 203 (ML-KEM-768) & FIPS 204 (ML-DSA-65) PQC Studio**: Interactive keypair generation, encapsulation/decapsulation, digital signature generation, verification, and tamper detection with byte-level payload inspections.
+   - **Kaiser FIR & Polyphase Matrix Lab**: Interactive FIR filter designer with live frequency response $|H(f)|$, impulse response $h[n]$, and 4-column AIE2 polyphase SIMD mapping visualizer.
+   - **AIE2 4×5 Tile Topology Explorer**: Visual mapping of the Phoenix NPU architecture (Memory Tiles, Vector Compute Tiles, DMA channels, and ObjectFIFO interconnects).
+
+3. **Multi-Format Telemetry & Reporting**:
+   - Web regression runner supports single-click test execution with real-time progress bars, per-kernel timing, and instant export to GitHub-ready Markdown or JSON test reports.
+
+---
+
+## 6. References, Upstream Projects & Third-Party Repositories
+
+### Core Toolchains & Silicon Infrastructure
+- **[Xilinx/mlir-aie](https://github.com/Xilinx/mlir-aie)**: AI Engine MLIR dialect, IRON Python API, and `aiecc` compiler (pinned at commit [`3ca0193`](https://github.com/Xilinx/mlir-aie/commit/3ca0193cea9e2c39ec670a65f93e1dd43c969f22), [v1.4.1](https://github.com/Xilinx/mlir-aie/releases/tag/v1.4.1) + 13 commits, [PR #3545](https://github.com/Xilinx/mlir-aie/pull/3545)).
+- **[Xilinx/llvm-aie (Peano)](https://github.com/Xilinx/llvm-aie)**: AMD Clang/LLVM compiler targeting AIE/AIE2 vector processors (`21.0.0.2026080301+c9c5ecb7`).
+- **[Xilinx/XRT](https://github.com/Xilinx/XRT)**: Xilinx Runtime userspace libraries, `pyxrt` Python bindings, and `xrt-smi` hardware management CLI (Windows SDK [2.21.75](https://github.com/Xilinx/XRT/releases/tag/2.21.75)).
+- **[amd/xdna-driver](https://github.com/amd/xdna-driver)**: Linux and Windows kernel driver for AMD XDNA architecture.
+- **[Xilinx/aie-rt](https://github.com/Xilinx/aie-rt)**: AI Engine runtime library and `aie_api` header templates (`fft_dit_r2_stage`, `mmul`, `filter_even/odd`).
+
+### Algorithmic References & Kernels
+- **[diacccc/FFT_R4_AIE](https://github.com/diacccc/FFT_R4_AIE)**: AMD reference radix-4 Stockham FFT kernel for AIE-ML (Apache-2.0). `kernels/fft_stockham_f32.cc` is adapted from this source.
+- **[hal-lab-u-tokyo/ntt-aie](https://github.com/hal-lab-u-tokyo/ntt-aie)**: NTT implementation and vectorization research on AMD AI Engine architectures.
+- **[GiacomoPope/kyber-py](https://github.com/GiacomoPope/kyber-py)** (v1.0.1): Clean Python reference implementation of CRYSTALS-Kyber / FIPS 203.
+- **[GiacomoPope/dilithium-py](https://github.com/GiacomoPope/dilithium-py)** (v1.4.0): Clean Python reference implementation of CRYSTALS-Dilithium / FIPS 204.
+- **[pq-crystals reference implementations](https://github.com/pq-crystals)**: Official C reference implementations of Kyber and Dilithium.
+- **[usnistgov/ACVP-Server](https://github.com/usnistgov/ACVP-Server)**: Official NIST Automated Cryptographic Validation Protocol test vectors (vendored in `tests/m32_mlkem/vectors/` and `tests/m33_mldsa/vectors/`).
+
+### Standards & Academic Publications
+- **[NIST FIPS 203](https://nvlpubs.nist.gov/nistpubs/fips/nist.fips.203.pdf)** ([DOI: 10.6028/NIST.FIPS.203](https://doi.org/10.6028/NIST.FIPS.203)): Module-Lattice-Based Key-Encapsulation Mechanism Standard (ML-KEM).
+- **[NIST FIPS 204](https://nvlpubs.nist.gov/nistpubs/fips/nist.fips.204.pdf)** ([DOI: 10.6028/NIST.FIPS.204](https://doi.org/10.6028/NIST.FIPS.204)): Module-Lattice-Based Digital Signature Standard (ML-DSA).
+- **[NIST FIPS 202](https://nvlpubs.nist.gov/nistpubs/fips/nist.fips.202.pdf)**: SHA-3 Standard: Permutation-Based Hash and Extendable-Output Functions (SHAKE128 / SHAKE256).
+- **[Cooley & Tukey (1965)](https://garfield.library.upenn.edu/classics1993/A1993MJ84400001.pdf)**: *"An algorithm for the machine calculation of complex Fourier series"*, Math. Comp. 19, 297-301.
+- **[Barrett (1986)](https://link.springer.com/chapter/10.1007/3-540-47721-7_24)**: *"Implementing the Rivest Shamir and Adleman Public Key Encryption Algorithm on a Standard Digital Signal Processor"*, Advances in Cryptology — CRYPTO '86.
+- **[Stockham (1966)](https://dl.acm.org/doi/10.1145/1464182.1464209)**: *"High-speed convolution and correlation"*, AFIPS Spring Joint Computer Conf.
+- **[Gentleman & Sande (1966)](https://dl.acm.org/doi/10.1145/1464291.1464352)**: *"Fast Fourier transforms: for fun and profit"*, AFIPS Fall Joint Computer Conf.
+- **[Ozaki et al. (2012)](https://doi.org/10.1007/s11075-011-9478-1)**: *"Error-free transformation of matrix multiplication"*, Numerical Algorithms 59, 95–118.
+- **[Higham (2002)](https://doi.org/10.1137/1.9780898718027)**: *Accuracy and Stability of Numerical Algorithms*, 2nd ed., SIAM.
+- **[3GPP TS 38.104](https://www.3gpp.org/ftp/Specs/archive/38_series/38.104/)**: Base Station (BS) radio transmission and reception (EVM specifications for BPSK, QPSK, 16-QAM, 64-QAM).
 
 ---
 
 ## 7. Credits & Acknowledgments
 
-- **Lead Architect & Maintainer:** Midhat Nashar ([@midhatn](https://github.com/midhatn))
+- **Lead Architect & Maintainer:** Midhat Nashar ([@midhatn](https://github.com/midhatn)) — [GitHub Repository: midhatn/phoenix-sdr-dsp](https://github.com/midhatn/phoenix-sdr-dsp)
 - **AI Architecture & Engineering Partner:** Perplexity AI (Senior AMD XDNA / AIE & DSP Copilot)
-- **Upstream toolchain (Advanced Micro Devices, Inc. — formerly Xilinx):** [`mlir-aie`](https://github.com/Xilinx/mlir-aie), [`llvm-aie` (Peano)](https://github.com/Xilinx/llvm-aie), [`XRT`](https://github.com/Xilinx/XRT), [`xdna-driver`](https://github.com/amd/xdna-driver), and the [`FFT_R4_AIE`](https://github.com/diacccc/FFT_R4_AIE) radix-4 Stockham FFT reference (Apache-2.0), which `kernels/fft_stockham_f32.cc` is adapted from.
-- **Academic foundations:** J. W. Cooley & J. W. Tukey (1965) for the radix-2 FFT that seeds M16/M17; P. Barrett (1986) for the modular-reduction method underlying M10–M15b.
-- **Community reference:** [`hal-lab-u-tokyo/ntt-aie`](https://github.com/hal-lab-u-tokyo/ntt-aie) NTT-on-AIE reference implementation.
-- **License:** Apache License 2.0 for original project work. File-level
-  exceptions and third-party notices remain authoritative; see
-  [LICENSE](LICENSE), [LICENSE_HISTORY.md](LICENSE_HISTORY.md),
-  [NOTICE](NOTICE), and
-  [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). Immutable upstream
-  anchors and local SHA-256 identities are recorded in
-  [THIRD_PARTY_PROVENANCE.md](THIRD_PARTY_PROVENANCE.md). Citation metadata is
-  provided in [CITATION.cff](CITATION.cff) and [.zenodo.json](.zenodo.json).
+- **Upstream toolchain (Advanced Micro Devices, Inc. — formerly Xilinx):** [`mlir-aie`](https://github.com/Xilinx/mlir-aie), [`llvm-aie` (Peano)](https://github.com/Xilinx/llvm-aie), [`XRT`](https://github.com/Xilinx/XRT), [`xdna-driver`](https://github.com/amd/xdna-driver), and the [`FFT_R4_AIE`](https://github.com/diacccc/FFT_R4_AIE) radix-4 Stockham FFT reference (Apache-2.0).
+- **Academic foundations:** J. W. Cooley & J. W. Tukey (1965) for the radix-2 FFT; P. Barrett (1986) for modular Barrett reduction.
+- **Community references:** [`hal-lab-u-tokyo/ntt-aie`](https://github.com/hal-lab-u-tokyo/ntt-aie), [`GiacomoPope/kyber-py`](https://github.com/GiacomoPope/kyber-py), and [`GiacomoPope/dilithium-py`](https://github.com/GiacomoPope/dilithium-py).
+- **License:** Apache License 2.0. See [LICENSE](LICENSE), [LICENSE_HISTORY.md](LICENSE_HISTORY.md), [NOTICE](NOTICE), [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md), and [THIRD_PARTY_PROVENANCE.md](THIRD_PARTY_PROVENANCE.md).
+
+---
+
+## 8. Citation
+
+If you use this work, benchmarks, or software in your research or applications, please cite:
+
+```bibtex
+@software{nashar_phoenix_sdr_dsp_2026,
+  author       = {Nashar, Midhat},
+  title        = {{Phoenix SDR-DSP: Windows-Native DSP, SDR, and PQC Experiments for AMD Phoenix XDNA1}},
+  year         = {2026},
+  version      = {1.0.1},
+  publisher    = {GitHub},
+  journal      = {GitHub repository},
+  url          = {https://github.com/midhatn/phoenix-sdr-dsp}
+}
+```
+
+Or using [CITATION.cff](CITATION.cff) format:
+```yaml
+cff-version: 1.2.0
+title: "Phoenix SDR-DSP: Windows-Native DSP, SDR, and PQC Experiments for AMD Phoenix XDNA1"
+authors:
+  - family-names: "Nashar"
+    given-names: "Midhat"
+    alias: "midhatn"
+repository-code: "https://github.com/midhatn/phoenix-sdr-dsp"
+version: "1.0.1"
+date-released: "2026-08-18"
+license: "Apache-2.0"
+```
