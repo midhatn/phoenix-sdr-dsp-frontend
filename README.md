@@ -17,9 +17,9 @@
 <br/>
 
 <div align="center">
-  <img src="docs/assets/screenshot_constellation_evm.svg" alt="Phoenix SDR-DSP I/Q Constellation & EVM Analyzer" width="100%" />
+  <img src="docs/assets/screenshot_constellation_evm.png" alt="Phoenix SDR-DSP I/Q Constellation & EVM Analyzer" width="100%" />
   <br/><br/>
-  <img src="docs/assets/screenshot_spectrum_waterfall.svg" alt="Phoenix SDR-DSP Real-Time Spectrum Analyzer & Waterfall Spectrogram" width="100%" />
+  <img src="docs/assets/screenshot_spectrum_waterfall.png" alt="Phoenix SDR-DSP Real-Time Spectrum Analyzer & Waterfall Spectrogram" width="100%" />
 </div>
 
 <br/>
