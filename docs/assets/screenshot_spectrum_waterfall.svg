@@ -1,0 +1,234 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="100%" height="100%" style="background:#070b13; font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'JetBrains Mono', monospace;">
+  <defs>
+    <!-- Gradients -->
+    <linearGradient id="bgDark2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#090d16"/>
+      <stop offset="100%" stop-color="#05080f"/>
+    </linearGradient>
+    <linearGradient id="cardGrad2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0d1424"/>
+      <stop offset="100%" stop-color="#090f1d"/>
+    </linearGradient>
+    <linearGradient id="btnCyan2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#06b6d4"/>
+      <stop offset="100%" stop-color="#0284c7"/>
+    </linearGradient>
+    <linearGradient id="waterfallFull" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#020617"/>
+      <stop offset="12%" stop-color="#0369a1"/>
+      <stop offset="19%" stop-color="#06b6d4"/>
+      <stop offset="20%" stop-color="#ef4444"/>
+      <stop offset="21%" stop-color="#f59e0b"/>
+      <stop offset="22%" stop-color="#06b6d4"/>
+      <stop offset="28%" stop-color="#0369a1"/>
+      <stop offset="50%" stop-color="#020617"/>
+      <stop offset="78%" stop-color="#0369a1"/>
+      <stop offset="87%" stop-color="#06b6d4"/>
+      <stop offset="88%" stop-color="#f59e0b"/>
+      <stop offset="89%" stop-color="#ef4444"/>
+      <stop offset="90%" stop-color="#06b6d4"/>
+      <stop offset="95%" stop-color="#0369a1"/>
+      <stop offset="100%" stop-color="#020617"/>
+    </linearGradient>
+    <filter id="glowCyan2" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Canvas Outer Background -->
+  <rect width="1200" height="800" rx="10" fill="url(#bgDark2)" stroke="#172338" stroke-width="1.5"/>
+
+  <!-- Top App Header Bar -->
+  <rect width="1200" height="68" fill="#080e1a" stroke="#172338" stroke-width="1"/>
+  
+  <!-- Logo Icon -->
+  <rect x="20" y="16" width="36" height="36" rx="8" fill="#0284c7" stroke="#38bdf8" stroke-width="1.5"/>
+  <rect x="28" y="24" width="20" height="20" rx="3" fill="none" stroke="#ffffff" stroke-width="2"/>
+  <circle cx="38" cy="34" r="3.5" fill="#38bdf8"/>
+  <line x1="28" y1="34" x2="25" y2="34" stroke="#ffffff" stroke-width="2"/>
+  <line x1="48" y1="34" x2="51" y2="34" stroke="#ffffff" stroke-width="2"/>
+  <line x1="38" y1="24" x2="38" y2="21" stroke="#ffffff" stroke-width="2"/>
+  <line x1="38" y1="44" x2="38" y2="47" stroke="#ffffff" stroke-width="2"/>
+
+  <!-- Title and Platform Tag -->
+  <text x="68" y="34" fill="#ffffff" font-size="16" font-weight="800" letter-spacing="-0.3">Phoenix SDR-DSP</text>
+  <rect x="210" y="22" width="46" height="18" rx="9" fill="#083344" stroke="#06b6d4" stroke-width="0.8"/>
+  <text x="219" y="34.5" fill="#38bdf8" font-size="10" font-weight="700">v1.0.0</text>
+  
+  <circle cx="268" cy="31" r="2.5" fill="#64748b"/>
+  <text x="278" y="34" fill="#94a3b8" font-size="11.5" font-weight="500">AMD Ryzen AI NPU1 (XDNA1 / AIE2)</text>
+  <text x="68" y="52" fill="#64748b" font-size="11">SDR/DSP, Finite-Field &amp; Post-Quantum Cryptography (FIPS 203 + 204) Silicon Suite</text>
+
+  <!-- Top Badges / Telemetry -->
+  <rect x="580" y="20" width="230" height="28" rx="6" fill="#0b1322" stroke="#1e293b" stroke-width="1"/>
+  <path d="M 592 34 L 598 28 L 604 38 L 610 32 L 616 34" fill="none" stroke="#f59e0b" stroke-width="1.8"/>
+  <text x="622" y="38" fill="#94a3b8" font-size="11">I/Q: <tspan fill="#f1f5f9" font-weight="700">7.46 Msps</tspan> | BW: <tspan fill="#38bdf8" font-weight="700">59.7 MB/s</tspan></text>
+
+  <rect x="822" y="20" width="160" height="28" rx="6" fill="#042f2e" stroke="#0d9488" stroke-width="1"/>
+  <path d="M 834 34 L 839 39 L 848 29" fill="none" stroke="#10b981" stroke-width="2"/>
+  <text x="856" y="38" fill="#cbd5e1" font-size="11">Matrix: <tspan fill="#34d399" font-weight="800">30/34 PASS</tspan></text>
+
+  <rect x="992" y="20" width="190" height="28" rx="6" fill="url(#btnCyan2)"/>
+  <path d="M 1008 34 L 1014 26 L 1014 32 L 1020 32 L 1012 42 L 1012 36 Z" fill="#ffffff"/>
+  <text x="1026" y="38" fill="#ffffff" font-size="10.5" font-weight="800" letter-spacing="0.5">RUN ALL 34 SILICON TESTS</text>
+
+  <!-- Sub-Navbar / Module Navigation Strip -->
+  <rect y="68" width="1200" height="42" fill="#060a13" stroke="#172338" stroke-width="1"/>
+
+  <!-- Tab 1 -->
+  <rect x="16" y="74" width="190" height="30" rx="5" fill="#0c1424" stroke="#1e293b" stroke-width="0.8"/>
+  <circle cx="28" cy="89" r="6" fill="none" stroke="#10b981" stroke-width="1.5"/>
+  <path d="M 26 89 L 28 91 L 31 87" fill="none" stroke="#10b981" stroke-width="1.5"/>
+  <text x="38" y="93" fill="#94a3b8" font-size="11" font-weight="600">Silicon Regression Matrix</text>
+  <rect x="165" y="79" width="34" height="18" rx="9" fill="#064e3b"/>
+  <text x="171" y="91.5" fill="#34d399" font-size="9.5" font-weight="bold">30/34</text>
+
+  <!-- Tab 2 -->
+  <rect x="214" y="74" width="135" height="30" rx="5" fill="#0c1424" stroke="#1e293b" stroke-width="0.8"/>
+  <text x="228" y="93" fill="#94a3b8" font-size="11" font-weight="500">((•)) Live SDR Pipeline</text>
+
+  <!-- Tab 3 -->
+  <rect x="357" y="74" width="170" height="30" rx="5" fill="#0c1424" stroke="#1e293b" stroke-width="0.8"/>
+  <text x="372" y="93" fill="#94a3b8" font-size="11.5" font-weight="500">Constellation &amp; Demod</text>
+
+  <!-- Tab 4: Active Tab (Spectrum & Waterfall) -->
+  <rect x="535" y="74" width="170" height="30" rx="5" fill="#082f49" stroke="#0284c7" stroke-width="1.2"/>
+  <path d="M 547 93 L 552 83 L 557 95 L 562 87 L 567 93" fill="none" stroke="#38bdf8" stroke-width="1.8"/>
+  <text x="575" y="93" fill="#e0f2fe" font-size="11.5" font-weight="700">Spectrum &amp; Waterfall</text>
+
+  <!-- Tab 5 -->
+  <rect x="713" y="74" width="220" height="30" rx="5" fill="#0c1424" stroke="#1e293b" stroke-width="0.8"/>
+  <text x="727" y="93" fill="#94a3b8" font-size="11" font-weight="500">🛡️ PQC Studio (FIPS 203 &amp; 204)</text>
+  <rect x="867" y="79" width="60" height="18" rx="9" fill="#3b0764"/>
+  <text x="872" y="91.5" fill="#d8b4fe" font-size="9" font-weight="bold">Quantum-Safe</text>
+
+  <!-- Tab 6 -->
+  <rect x="941" y="74" width="170" height="30" rx="5" fill="#0c1424" stroke="#1e293b" stroke-width="0.8"/>
+  <text x="955" y="93" fill="#94a3b8" font-size="11" font-weight="500">🎛️ DSP Filter &amp; Channelizer</text>
+
+  <!-- Main Content Card Container (Screenshot 2: Spectrum & Waterfall) -->
+  <g transform="translate(16, 120)">
+    <!-- Controls Header Strip -->
+    <rect width="1168" height="66" rx="8" fill="url(#cardGrad2)" stroke="#172338" stroke-width="1"/>
+
+    <g transform="translate(20, 16)">
+      <!-- Slider 1: Tone 1 Frequency (f1) -->
+      <text x="0" y="14" fill="#94a3b8" font-size="11" font-weight="500">Tone 1 Frequency (f1)</text>
+      <text x="310" y="14" fill="#38bdf8" font-size="11.5" font-weight="700" font-family="'JetBrains Mono'">- 320 kHz</text>
+      <line x1="0" y1="28" x2="360" y2="28" stroke="#1e293b" stroke-width="4" stroke-linecap="round"/>
+      <line x1="0" y1="28" x2="55" y2="28" stroke="#06b6d4" stroke-width="4" stroke-linecap="round"/>
+      <circle cx="55" cy="28" r="6" fill="#38bdf8" stroke="#ffffff" stroke-width="1.5"/>
+
+      <!-- Checkbox & Slider 2: Tone 2 Frequency (f2) -->
+      <g transform="translate(390, 0)">
+        <rect x="0" y="3" width="14" height="14" rx="3" fill="#0284c7"/>
+        <path d="M 3 10 L 6 13 L 11 6" fill="none" stroke="#ffffff" stroke-width="2"/>
+        <text x="20" y="14" fill="#94a3b8" font-size="11" font-weight="500">Tone 2 Frequency (f2)</text>
+        <text x="300" y="14" fill="#c084fc" font-size="11.5" font-weight="700" font-family="'JetBrains Mono'">400 kHz</text>
+        <line x1="0" y1="28" x2="350" y2="28" stroke="#1e293b" stroke-width="4" stroke-linecap="round"/>
+        <line x1="0" y1="28" x2="310" y2="28" stroke="#c084fc" stroke-width="4" stroke-linecap="round"/>
+        <circle cx="310" cy="28" r="6" fill="#c084fc" stroke="#ffffff" stroke-width="1.5"/>
+      </g>
+
+      <!-- Slider 3: Noise Floor (dBm) -->
+      <g transform="translate(770, 0)">
+        <text x="0" y="14" fill="#94a3b8" font-size="11" font-weight="500">Noise Floor (dBm)</text>
+        <text x="310" y="14" fill="#94a3b8" font-size="11.5" font-weight="700" font-family="'JetBrains Mono'">- 48 dB</text>
+        <line x1="0" y1="28" x2="350" y2="28" stroke="#1e293b" stroke-width="4" stroke-linecap="round"/>
+        <line x1="0" y1="28" x2="130" y2="28" stroke="#64748b" stroke-width="4" stroke-linecap="round"/>
+        <circle cx="130" cy="28" r="6" fill="#94a3b8" stroke="#ffffff" stroke-width="1.5"/>
+      </g>
+    </g>
+
+    <!-- Spectrum PSD Card (Middle Section) -->
+    <g transform="translate(0, 80)">
+      <rect width="1168" height="340" rx="8" fill="url(#cardGrad2)" stroke="#172338" stroke-width="1"/>
+
+      <!-- PSD Header -->
+      <g transform="translate(20, 20)">
+        <text x="0" y="16" fill="#f8fafc" font-size="14" font-weight="700">Power Spectral Density (PSD)</text>
+        <rect x="210" y="2" width="195" height="20" rx="4" fill="#083344" stroke="#06b6d4" stroke-width="0.8"/>
+        <text x="218" y="16" fill="#38bdf8" font-size="11" font-weight="700" font-family="'JetBrains Mono'">Peak: -320.3 kHz @ -0.1 dBFS</text>
+
+        <text x="960" y="16" fill="#64748b" font-size="11" font-family="'JetBrains Mono'">Span: -500 kHz to +500 kHz</text>
+      </g>
+
+      <!-- PSD Graph Area -->
+      <g transform="translate(20, 56)">
+        <rect width="1128" height="230" rx="6" fill="#050811" stroke="#172338" stroke-width="1"/>
+
+        <!-- Grid Lines & dB Marks -->
+        <line x1="0" y1="46" x2="1128" y2="46" stroke="#172338" stroke-width="0.8" stroke-dasharray="3,3"/>
+        <text x="1090" y="44" fill="#475569" font-size="9.5" font-family="'JetBrains Mono'">-10 dB</text>
+
+        <line x1="0" y1="100" x2="1128" y2="100" stroke="#172338" stroke-width="0.8" stroke-dasharray="3,3"/>
+        <text x="1090" y="98" fill="#475569" font-size="9.5" font-family="'JetBrains Mono'">-30 dB</text>
+
+        <line x1="0" y1="154" x2="1128" y2="154" stroke="#172338" stroke-width="0.8" stroke-dasharray="3,3"/>
+        <text x="1090" y="152" fill="#475569" font-size="9.5" font-family="'JetBrains Mono'">-50 dB</text>
+
+        <line x1="0" y1="200" x2="1128" y2="200" stroke="#172338" stroke-width="0.8" stroke-dasharray="3,3"/>
+        <text x="1090" y="198" fill="#475569" font-size="9.5" font-family="'JetBrains Mono'">-70 dB</text>
+
+        <line x1="564" y1="0" x2="564" y2="230" stroke="#172338" stroke-width="0.8" stroke-dasharray="3,3"/>
+
+        <!-- PSD Continuous Trace with 2 Sharp Peaks: -320kHz (x≈200) and +400kHz (x≈980) -->
+        <path d="M 0 195 
+                 L 12 188 L 24 196 L 36 182 L 48 190 L 60 185 L 72 188 L 84 175 L 96 182 L 108 178 L 120 185 L 132 176 L 144 186 L 156 168 L 168 174 
+                 L 180 140 L 192 78 L 202 38 L 210 38 L 220 84 L 232 150 L 244 176 L 256 182 L 268 174 L 280 186 L 292 179 L 304 184 L 316 180 
+                 L 328 186 L 340 178 L 352 182 L 364 180 L 376 188 L 388 175 L 400 186 L 412 174 L 424 188 L 436 179 L 448 186 L 460 178 L 472 184 
+                 L 484 176 L 496 188 L 508 178 L 520 185 L 532 176 L 544 184 L 556 178 L 568 186 L 580 180 L 592 188 L 604 174 L 616 186 L 628 176 
+                 L 640 184 L 652 178 L 664 188 L 676 180 L 688 185 L 700 174 L 712 186 L 724 178 L 736 188 L 748 180 L 760 186 L 772 176 L 784 188 
+                 L 796 180 L 808 186 L 820 176 L 832 185 L 844 178 L 856 186 L 868 178 L 880 186 L 892 180 L 904 188 L 916 174 L 928 182 L 940 156 
+                 L 952 110 L 964 56 L 974 42 L 984 42 L 994 92 L 1006 154 L 1018 178 L 1030 184 L 1042 176 L 1054 188 L 1066 180 L 1078 185 L 1090 174 
+                 L 1102 188 L 1114 180 L 1128 195" 
+              fill="none" stroke="#06b6d4" stroke-width="3" filter="url(#glowCyan2)"/>
+      </g>
+
+      <!-- Frequency Axis Marks -->
+      <g transform="translate(20, 296)">
+        <text x="0" y="16" fill="#64748b" font-size="10" font-family="'JetBrains Mono'">-500 kHz (-fs/2)</text>
+        <text x="280" y="16" fill="#64748b" font-size="10" font-family="'JetBrains Mono'">-250 kHz</text>
+        <text x="540" y="16" fill="#64748b" font-size="10" font-family="'JetBrains Mono'">0 kHz (DC)</text>
+        <text x="800" y="16" fill="#64748b" font-size="10" font-family="'JetBrains Mono'">+250 kHz</text>
+        <text x="1040" y="16" fill="#64748b" font-size="10" font-family="'JetBrains Mono'">+500 kHz (+fs/2)</text>
+      </g>
+    </g>
+
+    <!-- Waterfall Spectrogram Time History Card (Bottom Section) -->
+    <g transform="translate(0, 430)">
+      <rect width="1168" height="215" rx="8" fill="url(#cardGrad2)" stroke="#172338" stroke-width="1"/>
+
+      <!-- Waterfall Header -->
+      <g transform="translate(20, 18)">
+        <text x="0" y="16" fill="#f8fafc" font-size="14" font-weight="700">Waterfall Spectrogram Time History</text>
+        <text x="1000" y="16" fill="#64748b" font-size="11" font-family="'JetBrains Mono'">Scrolling Display</text>
+      </g>
+
+      <!-- 2D Waterfall Texture Display Area -->
+      <g transform="translate(20, 44)">
+        <rect width="1128" height="120" rx="6" fill="#030712" stroke="#172338" stroke-width="1"/>
+
+        <!-- Multi-layer Noise & Gradient Strip (Simulating the active waterfall in screenshot) -->
+        <rect x="2" y="2" width="1124" height="116" rx="5" fill="url(#waterfallFull)"/>
+        
+        <!-- Center bright vertical spectral traces corresponding to the two tones -->
+        <rect x="200" y="2" width="16" height="116" fill="#f59e0b" opacity="0.95"/>
+        <rect x="204" y="2" width="8" height="116" fill="#ef4444"/>
+        <rect x="207" y="2" width="2" height="116" fill="#ffffff"/>
+
+        <rect x="970" y="2" width="16" height="116" fill="#f59e0b" opacity="0.95"/>
+        <rect x="974" y="2" width="8" height="116" fill="#ef4444"/>
+        <rect x="977" y="2" width="2" height="116" fill="#ffffff"/>
+      </g>
+
+      <!-- Waterfall Footer Axis -->
+      <g transform="translate(20, 178)">
+        <text x="0" y="16" fill="#64748b" font-size="10" font-family="'JetBrains Mono'">-500 kHz</text>
+        <text x="450" y="16" fill="#64748b" font-size="10" font-family="'JetBrains Mono'">Time: Latest (top) → Past (bottom)</text>
+        <text x="1060" y="16" fill="#64748b" font-size="10" font-family="'JetBrains Mono'">+500 kHz</text>
+      </g>
+    </g>
+  </g>
+</svg>

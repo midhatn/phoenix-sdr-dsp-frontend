@@ -1,0 +1,373 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="100%" height="100%" style="background:#070b13; font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'JetBrains Mono', monospace;">
+  <defs>
+    <!-- Gradients -->
+    <linearGradient id="bgDark" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#090d16"/>
+      <stop offset="100%" stop-color="#05080f"/>
+    </linearGradient>
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0d1424"/>
+      <stop offset="100%" stop-color="#090f1d"/>
+    </linearGradient>
+    <linearGradient id="btnCyan" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#06b6d4"/>
+      <stop offset="100%" stop-color="#0284c7"/>
+    </linearGradient>
+    <linearGradient id="waterfallGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#030712"/>
+      <stop offset="15%" stop-color="#082f49"/>
+      <stop offset="30%" stop-color="#0284c7"/>
+      <stop offset="55%" stop-color="#06b6d4"/>
+      <stop offset="70%" stop-color="#10b981"/>
+      <stop offset="85%" stop-color="#f59e0b"/>
+      <stop offset="96%" stop-color="#ef4444"/>
+      <stop offset="100%" stop-color="#ffffff"/>
+    </linearGradient>
+    <filter id="glowCyan" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2.5" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+    <filter id="glowGreen" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Canvas Outer Background -->
+  <rect width="1200" height="800" rx="10" fill="url(#bgDark)" stroke="#172338" stroke-width="1.5"/>
+
+  <!-- Top App Header Bar -->
+  <rect width="1200" height="68" fill="#080e1a" stroke="#172338" stroke-width="1"/>
+  
+  <!-- Logo Icon -->
+  <rect x="20" y="16" width="36" height="36" rx="8" fill="#0284c7" stroke="#38bdf8" stroke-width="1.5"/>
+  <rect x="28" y="24" width="20" height="20" rx="3" fill="none" stroke="#ffffff" stroke-width="2"/>
+  <circle cx="38" cy="34" r="3.5" fill="#38bdf8"/>
+  <line x1="28" y1="34" x2="25" y2="34" stroke="#ffffff" stroke-width="2"/>
+  <line x1="48" y1="34" x2="51" y2="34" stroke="#ffffff" stroke-width="2"/>
+  <line x1="38" y1="24" x2="38" y2="21" stroke="#ffffff" stroke-width="2"/>
+  <line x1="38" y1="44" x2="38" y2="47" stroke="#ffffff" stroke-width="2"/>
+
+  <!-- Title and Platform Tag -->
+  <text x="68" y="34" fill="#ffffff" font-size="16" font-weight="800" letter-spacing="-0.3">Phoenix SDR-DSP</text>
+  <rect x="210" y="22" width="46" height="18" rx="9" fill="#083344" stroke="#06b6d4" stroke-width="0.8"/>
+  <text x="219" y="34.5" fill="#38bdf8" font-size="10" font-weight="700">v1.0.0</text>
+  
+  <circle cx="268" cy="31" r="2.5" fill="#64748b"/>
+  <text x="278" y="34" fill="#94a3b8" font-size="11.5" font-weight="500">AMD Ryzen AI NPU1 (XDNA1 / AIE2)</text>
+  <text x="68" y="52" fill="#64748b" font-size="11">SDR/DSP, Finite-Field &amp; Post-Quantum Cryptography (FIPS 203 + 204) Silicon Suite</text>
+
+  <!-- Top Badges / Telemetry -->
+  <!-- I/Q Throughput Badge -->
+  <rect x="580" y="20" width="230" height="28" rx="6" fill="#0b1322" stroke="#1e293b" stroke-width="1"/>
+  <path d="M 592 34 L 598 28 L 604 38 L 610 32 L 616 34" fill="none" stroke="#f59e0b" stroke-width="1.8"/>
+  <text x="622" y="38" fill="#94a3b8" font-size="11">I/Q: <tspan fill="#f1f5f9" font-weight="700">7.46 Msps</tspan> | BW: <tspan fill="#38bdf8" font-weight="700">59.7 MB/s</tspan></text>
+
+  <!-- Matrix Pass Badge -->
+  <rect x="822" y="20" width="160" height="28" rx="6" fill="#042f2e" stroke="#0d9488" stroke-width="1"/>
+  <path d="M 834 34 L 839 39 L 848 29" fill="none" stroke="#10b981" stroke-width="2"/>
+  <text x="856" y="38" fill="#cbd5e1" font-size="11">Matrix: <tspan fill="#34d399" font-weight="800">30/34 PASS</tspan></text>
+
+  <!-- Primary CTA Button -->
+  <rect x="992" y="20" width="190" height="28" rx="6" fill="url(#btnCyan)"/>
+  <path d="M 1008 34 L 1014 26 L 1014 32 L 1020 32 L 1012 42 L 1012 36 Z" fill="#ffffff"/>
+  <text x="1026" y="38" fill="#ffffff" font-size="10.5" font-weight="800" letter-spacing="0.5">RUN ALL 34 SILICON TESTS</text>
+
+  <!-- Sub-Navbar / Module Navigation Strip -->
+  <rect y="68" width="1200" height="42" fill="#060a13" stroke="#172338" stroke-width="1"/>
+
+  <!-- Tab 1: Regression -->
+  <rect x="16" y="74" width="190" height="30" rx="5" fill="#0c1424" stroke="#1e293b" stroke-width="0.8"/>
+  <circle cx="28" cy="89" r="6" fill="none" stroke="#10b981" stroke-width="1.5"/>
+  <path d="M 26 89 L 28 91 L 31 87" fill="none" stroke="#10b981" stroke-width="1.5"/>
+  <text x="38" y="93" fill="#94a3b8" font-size="11" font-weight="600">Silicon Regression Matrix</text>
+  <rect x="165" y="79" width="34" height="18" rx="9" fill="#064e3b"/>
+  <text x="171" y="91.5" fill="#34d399" font-size="9.5" font-weight="bold">30/34</text>
+
+  <!-- Tab 2: SDR Pipeline -->
+  <rect x="214" y="74" width="135" height="30" rx="5" fill="#0c1424" stroke="#1e293b" stroke-width="0.8"/>
+  <text x="228" y="93" fill="#94a3b8" font-size="11" font-weight="500">((•)) Live SDR Pipeline</text>
+
+  <!-- Tab 3: Active Tab (Constellation & Demod) -->
+  <rect x="357" y="74" width="170" height="30" rx="5" fill="#082f49" stroke="#0284c7" stroke-width="1.2"/>
+  <rect x="368" y="82" width="12" height="12" rx="2" fill="none" stroke="#38bdf8" stroke-width="1.5"/>
+  <circle cx="371" cy="85" r="1" fill="#38bdf8"/>
+  <circle cx="377" cy="85" r="1" fill="#38bdf8"/>
+  <circle cx="371" cy="91" r="1" fill="#38bdf8"/>
+  <circle cx="377" cy="91" r="1" fill="#38bdf8"/>
+  <text x="386" y="93" fill="#e0f2fe" font-size="11.5" font-weight="700">Constellation &amp; Demod</text>
+
+  <!-- Tab 4: Spectrum & Waterfall -->
+  <rect x="535" y="74" width="155" height="30" rx="5" fill="#0c1424" stroke="#1e293b" stroke-width="0.8"/>
+  <path d="M 545 93 L 550 85 L 555 95 L 560 89 L 565 93" fill="none" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="572" y="93" fill="#94a3b8" font-size="11" font-weight="500">Spectrum &amp; Waterfall</text>
+
+  <!-- Tab 5: PQC Studio -->
+  <rect x="698" y="74" width="220" height="30" rx="5" fill="#0c1424" stroke="#1e293b" stroke-width="0.8"/>
+  <text x="712" y="93" fill="#94a3b8" font-size="11" font-weight="500">🛡️ PQC Studio (FIPS 203 &amp; 204)</text>
+  <rect x="852" y="79" width="60" height="18" rx="9" fill="#3b0764"/>
+  <text x="857" y="91.5" fill="#d8b4fe" font-size="9" font-weight="bold">Quantum-Safe</text>
+
+  <!-- Tab 6: DSP Filter & Channelizer -->
+  <rect x="926" y="74" width="170" height="30" rx="5" fill="#0c1424" stroke="#1e293b" stroke-width="0.8"/>
+  <text x="940" y="93" fill="#94a3b8" font-size="11" font-weight="500">🎛️ DSP Filter &amp; Channelizer</text>
+
+  <!-- Main Content Card Container (Screenshot 1: Constellation & Demod) -->
+  <g transform="translate(16, 120)">
+    <!-- Main Card Shell -->
+    <rect width="1168" height="660" rx="8" fill="url(#cardGrad)" stroke="#172338" stroke-width="1"/>
+
+    <!-- Inner Header Section -->
+    <g transform="translate(20, 20)">
+      <!-- Module Icon -->
+      <rect width="24" height="24" rx="4" fill="#082f49" stroke="#0284c7" stroke-width="1"/>
+      <circle cx="7" cy="7" r="1.5" fill="#38bdf8"/>
+      <circle cx="17" cy="7" r="1.5" fill="#38bdf8"/>
+      <circle cx="7" cy="17" r="1.5" fill="#38bdf8"/>
+      <circle cx="17" cy="17" r="1.5" fill="#38bdf8"/>
+
+      <text x="34" y="14" fill="#f8fafc" font-size="14" font-weight="700">I/Q Constellation &amp; EVM Analyzer (M25 / M26)</text>
+      <text x="34" y="28" fill="#64748b" font-size="10.5">Interactive modulation mapping, carrier recovery, decision slicing, and 3GPP EVM analysis</text>
+
+      <!-- Modulation Scheme Selector Pills -->
+      <g transform="translate(850, -4)">
+        <rect x="0" y="0" width="54" height="28" rx="4" fill="#0f172a" stroke="#1e293b" stroke-width="1"/>
+        <text x="12" y="18" fill="#94a3b8" font-size="11" font-weight="600">BPSK</text>
+
+        <rect x="58" y="0" width="54" height="28" rx="4" fill="#0f172a" stroke="#1e293b" stroke-width="1"/>
+        <text x="70" y="18" fill="#94a3b8" font-size="11" font-weight="600">QPSK</text>
+
+        <!-- Active 16QAM -->
+        <rect x="116" y="0" width="60" height="28" rx="4" fill="#06b6d4"/>
+        <text x="126" y="18" fill="#082f49" font-size="11" font-weight="800">16QAM</text>
+
+        <rect x="180" y="0" width="60" height="28" rx="4" fill="#0f172a" stroke="#1e293b" stroke-width="1"/>
+        <text x="190" y="18" fill="#94a3b8" font-size="11" font-weight="600">64QAM</text>
+      </g>
+    </g>
+
+    <!-- Sliders and Controls Row -->
+    <g transform="translate(20, 75)">
+      <!-- Slider 1: Channel SNR -->
+      <text x="0" y="14" fill="#94a3b8" font-size="11" font-weight="500">Channel SNR (AWGN)</text>
+      <text x="210" y="14" fill="#38bdf8" font-size="11.5" font-weight="700" font-family="'JetBrains Mono'">26 dB</text>
+      <line x1="0" y1="30" x2="250" y2="30" stroke="#1e293b" stroke-width="4" stroke-linecap="round"/>
+      <line x1="0" y1="30" x2="140" y2="30" stroke="#06b6d4" stroke-width="4" stroke-linecap="round"/>
+      <circle cx="140" cy="30" r="6" fill="#38bdf8" stroke="#ffffff" stroke-width="1.5"/>
+
+      <!-- Slider 2: Phase Rotation -->
+      <text x="280" y="14" fill="#94a3b8" font-size="11" font-weight="500">Phase Rotation (Δθ)</text>
+      <text x="490" y="14" fill="#38bdf8" font-size="11.5" font-weight="700" font-family="'JetBrains Mono'">5°</text>
+      <line x1="280" y1="30" x2="510" y2="30" stroke="#1e293b" stroke-width="4" stroke-linecap="round"/>
+      <line x1="280" y1="30" x2="410" y2="30" stroke="#06b6d4" stroke-width="4" stroke-linecap="round"/>
+      <circle cx="410" cy="30" r="6" fill="#38bdf8" stroke="#ffffff" stroke-width="1.5"/>
+
+      <!-- Slider 3: I/Q Amplitude Skew -->
+      <text x="540" y="14" fill="#94a3b8" font-size="11" font-weight="500">I/Q Amplitude Skew</text>
+      <text x="750" y="14" fill="#38bdf8" font-size="11.5" font-weight="700" font-family="'JetBrains Mono'">0%</text>
+      <line x1="540" y1="30" x2="760" y2="30" stroke="#1e293b" stroke-width="4" stroke-linecap="round"/>
+      <circle cx="650" cy="30" r="6" fill="#38bdf8" stroke="#ffffff" stroke-width="1.5"/>
+
+      <!-- Checkbox: Costas Loop Lock -->
+      <g transform="translate(800, 0)">
+        <rect x="0" y="5" width="16" height="16" rx="3" fill="#0284c7"/>
+        <path d="M 3 13 L 7 17 L 13 9" fill="none" stroke="#ffffff" stroke-width="2"/>
+        <text x="24" y="17" fill="#ffffff" font-size="11.5" font-weight="700">Costas Loop Carrier Lock</text>
+        <text x="24" y="32" fill="#64748b" font-size="10">Active closed-loop phase tracking (M25)</text>
+      </g>
+    </g>
+
+    <!-- Lower Split: Left Constellation Box (700px), Right Metrics (420px) -->
+    
+    <!-- Left Column: I/Q Complex Plane Diagram -->
+    <g transform="translate(20, 140)">
+      <text x="0" y="20" fill="#f8fafc" font-size="13.5" font-weight="700">I/Q Complex Plane Diagram</text>
+      
+      <!-- Legend -->
+      <circle cx="430" cy="16" r="4" fill="#06b6d4"/>
+      <text x="440" y="20" fill="#38bdf8" font-size="11">Received Samples (256)</text>
+      
+      <circle cx="610" cy="16" r="4" fill="#10b981"/>
+      <text x="620" y="20" fill="#34d399" font-size="11">Ideal Grid Points</text>
+
+      <!-- Constellation Graph Canvas -->
+      <g transform="translate(0, 36)">
+        <rect width="700" height="450" rx="8" fill="#060911" stroke="#172338" stroke-width="1"/>
+
+        <!-- Center Crosshair & Rings -->
+        <line x1="350" y1="20" x2="350" y2="430" stroke="#172338" stroke-width="1.2"/>
+        <line x1="40" y1="225" x2="660" y2="225" stroke="#172338" stroke-width="1.2"/>
+        <circle cx="350" cy="225" r="160" fill="none" stroke="#172338" stroke-width="1" stroke-dasharray="4,4"/>
+        <circle cx="350" cy="225" r="90" fill="none" stroke="#172338" stroke-width="0.8" stroke-dasharray="3,3"/>
+
+        <!-- 16-QAM Ideal Grid Markers (Green Crosshairs) & Received Scatter Clouds (Cyan Dots) -->
+        
+        <!-- Row 1: y = 105 -->
+        <!-- (-3, 3) -->
+        <circle cx="210" cy="105" r="7" fill="none" stroke="#10b981" stroke-width="1.5"/>
+        <circle cx="206" cy="102" r="3.5" fill="#38bdf8" opacity="0.9"/>
+        <circle cx="212" cy="108" r="3" fill="#06b6d4" opacity="0.8"/>
+        <circle cx="214" cy="103" r="2.5" fill="#38bdf8" opacity="0.85"/>
+        <circle cx="208" cy="109" r="2.5" fill="#06b6d4" opacity="0.9"/>
+
+        <!-- (-1, 3) -->
+        <circle cx="300" cy="105" r="7" fill="none" stroke="#10b981" stroke-width="1.5"/>
+        <circle cx="298" cy="103" r="3.5" fill="#38bdf8" opacity="0.9"/>
+        <circle cx="304" cy="107" r="3" fill="#06b6d4" opacity="0.8"/>
+        <circle cx="302" cy="101" r="2.5" fill="#38bdf8" opacity="0.85"/>
+        <circle cx="296" cy="108" r="2.5" fill="#06b6d4" opacity="0.9"/>
+
+        <!-- (+1, 3) -->
+        <circle cx="400" cy="105" r="7" fill="none" stroke="#10b981" stroke-width="1.5"/>
+        <circle cx="397" cy="102" r="3.5" fill="#38bdf8" opacity="0.9"/>
+        <circle cx="404" cy="106" r="3" fill="#06b6d4" opacity="0.8"/>
+        <circle cx="406" cy="101" r="2.5" fill="#38bdf8" opacity="0.85"/>
+        <circle cx="398" cy="108" r="2.5" fill="#06b6d4" opacity="0.9"/>
+
+        <!-- (+3, 3) -->
+        <circle cx="490" cy="105" r="7" fill="none" stroke="#10b981" stroke-width="1.5"/>
+        <circle cx="486" cy="103" r="3.5" fill="#38bdf8" opacity="0.9"/>
+        <circle cx="493" cy="107" r="3" fill="#06b6d4" opacity="0.8"/>
+        <circle cx="494" cy="102" r="2.5" fill="#38bdf8" opacity="0.85"/>
+        <circle cx="488" cy="109" r="2.5" fill="#06b6d4" opacity="0.9"/>
+
+        <!-- Row 2: y = 185 -->
+        <!-- (-3, 1) -->
+        <circle cx="210" cy="185" r="7" fill="none" stroke="#10b981" stroke-width="1.5"/>
+        <circle cx="207" cy="183" r="3.5" fill="#38bdf8"/>
+        <circle cx="213" cy="187" r="3" fill="#06b6d4"/>
+        <circle cx="209" cy="189" r="2.5" fill="#38bdf8"/>
+
+        <!-- (-1, 1) -->
+        <circle cx="300" cy="185" r="7" fill="none" stroke="#10b981" stroke-width="1.5"/>
+        <circle cx="297" cy="184" r="3.5" fill="#38bdf8"/>
+        <circle cx="303" cy="187" r="3" fill="#06b6d4"/>
+        <circle cx="301" cy="182" r="2.5" fill="#38bdf8"/>
+
+        <!-- (+1, 1) -->
+        <circle cx="400" cy="185" r="7" fill="none" stroke="#10b981" stroke-width="1.5"/>
+        <circle cx="398" cy="183" r="3.5" fill="#38bdf8"/>
+        <circle cx="403" cy="187" r="3" fill="#06b6d4"/>
+        <circle cx="405" cy="182" r="2.5" fill="#38bdf8"/>
+
+        <!-- (+3, 1) -->
+        <circle cx="490" cy="185" r="7" fill="none" stroke="#10b981" stroke-width="1.5"/>
+        <circle cx="487" cy="184" r="3.5" fill="#38bdf8"/>
+        <circle cx="493" cy="187" r="3" fill="#06b6d4"/>
+        <circle cx="492" cy="182" r="2.5" fill="#38bdf8"/>
+
+        <!-- Row 3: y = 265 -->
+        <!-- (-3, -1) -->
+        <circle cx="210" cy="265" r="7" fill="none" stroke="#10b981" stroke-width="1.5"/>
+        <circle cx="208" cy="263" r="3.5" fill="#38bdf8"/>
+        <circle cx="214" cy="267" r="3" fill="#06b6d4"/>
+        <circle cx="207" cy="269" r="2.5" fill="#38bdf8"/>
+
+        <!-- (-1, -1) -->
+        <circle cx="300" cy="265" r="7" fill="none" stroke="#10b981" stroke-width="1.5"/>
+        <circle cx="299" cy="264" r="3.5" fill="#38bdf8"/>
+        <circle cx="304" cy="268" r="3" fill="#06b6d4"/>
+        <circle cx="297" cy="262" r="2.5" fill="#38bdf8"/>
+
+        <!-- (+1, -1) -->
+        <circle cx="400" cy="265" r="7" fill="none" stroke="#10b981" stroke-width="1.5"/>
+        <circle cx="399" cy="263" r="3.5" fill="#38bdf8"/>
+        <circle cx="405" cy="267" r="3" fill="#06b6d4"/>
+        <circle cx="403" cy="262" r="2.5" fill="#38bdf8"/>
+
+        <!-- (+3, -1) -->
+        <circle cx="490" cy="265" r="7" fill="none" stroke="#10b981" stroke-width="1.5"/>
+        <circle cx="488" cy="264" r="3.5" fill="#38bdf8"/>
+        <circle cx="494" cy="268" r="3" fill="#06b6d4"/>
+        <circle cx="491" cy="262" r="2.5" fill="#38bdf8"/>
+
+        <!-- Row 4: y = 345 -->
+        <!-- (-3, -3) -->
+        <circle cx="210" cy="345" r="7" fill="none" stroke="#10b981" stroke-width="1.5"/>
+        <circle cx="206" cy="342" r="3.5" fill="#38bdf8"/>
+        <circle cx="213" cy="348" r="3" fill="#06b6d4"/>
+        <circle cx="214" cy="343" r="2.5" fill="#38bdf8"/>
+
+        <!-- (-1, -3) -->
+        <circle cx="300" cy="345" r="7" fill="none" stroke="#10b981" stroke-width="1.5"/>
+        <circle cx="298" cy="343" r="3.5" fill="#38bdf8"/>
+        <circle cx="304" cy="347" r="3" fill="#06b6d4"/>
+        <circle cx="302" cy="341" r="2.5" fill="#38bdf8"/>
+
+        <!-- (+1, -3) -->
+        <circle cx="400" cy="345" r="7" fill="none" stroke="#10b981" stroke-width="1.5"/>
+        <circle cx="397" cy="342" r="3.5" fill="#38bdf8"/>
+        <circle cx="404" cy="346" r="3" fill="#06b6d4"/>
+        <circle cx="406" cy="341" r="2.5" fill="#38bdf8"/>
+
+        <!-- (+3, -3) -->
+        <circle cx="490" cy="345" r="7" fill="none" stroke="#10b981" stroke-width="1.5"/>
+        <circle cx="486" cy="343" r="3.5" fill="#38bdf8"/>
+        <circle cx="493" cy="347" r="3" fill="#06b6d4"/>
+        <circle cx="494" cy="342" r="2.5" fill="#38bdf8"/>
+      </g>
+    </g>
+
+    <!-- Right Column: EVM & Signal Quality Metrics Card -->
+    <g transform="translate(740, 140)">
+      <!-- Top Card: EVM Metrics -->
+      <g transform="translate(0, 0)">
+        <path d="M 4 16 L 9 8 L 9 14 L 14 14 L 8 24 L 8 18 Z" fill="#38bdf8"/>
+        <text x="20" y="20" fill="#f8fafc" font-size="13.5" font-weight="700">EVM &amp; Signal Quality Metrics</text>
+
+        <!-- Box Shell -->
+        <g transform="translate(0, 36)">
+          <rect width="405" height="260" rx="8" fill="#070c17" stroke="#172338" stroke-width="1"/>
+
+          <!-- Metric 1: EVM (RMS) -->
+          <text x="20" y="32" fill="#94a3b8" font-size="11.5" font-weight="500">EVM (RMS):</text>
+          <text x="330" y="32" fill="#f59e0b" font-size="14.5" font-weight="800" font-family="'JetBrains Mono'">9.81%</text>
+          <rect x="20" y="44" width="365" height="6" rx="3" fill="#1e293b"/>
+          <rect x="20" y="44" width="130" height="6" rx="3" fill="#f59e0b"/>
+
+          <line x1="20" y1="72" x2="385" y2="72" stroke="#172338" stroke-width="1"/>
+
+          <!-- Metric 2: Peak EVM -->
+          <text x="20" y="98" fill="#94a3b8" font-size="11.5" font-weight="500">Peak EVM:</text>
+          <text x="330" y="98" fill="#f1f5f9" font-size="14" font-weight="700" font-family="'JetBrains Mono'">17.24%</text>
+
+          <line x1="20" y1="126" x2="385" y2="126" stroke="#172338" stroke-width="1"/>
+
+          <!-- Metric 3: Estimated SNR -->
+          <text x="20" y="152" fill="#94a3b8" font-size="11.5" font-weight="500">Estimated SNR:</text>
+          <text x="330" y="152" fill="#38bdf8" font-size="14" font-weight="700" font-family="'JetBrains Mono'">20.2 dB</text>
+
+          <line x1="20" y1="180" x2="385" y2="180" stroke="#172338" stroke-width="1"/>
+
+          <!-- Metric 4: Decision Compliance -->
+          <text x="20" y="214" fill="#94a3b8" font-size="11.5" font-weight="500">Decision Compliance:</text>
+          <g transform="translate(230, 200)">
+            <circle cx="10" cy="11" r="7" fill="#042f2e" stroke="#10b981" stroke-width="1.5"/>
+            <path d="M 7 11 L 9.5 13.5 L 13.5 8.5" fill="none" stroke="#34d399" stroke-width="1.8"/>
+            <text x="22" y="15" fill="#34d399" font-size="12" font-weight="800" font-family="'JetBrains Mono'">3GPP TS 38.104 PASS</text>
+          </g>
+        </g>
+      </g>
+
+      <!-- Bottom Card: NPU Slicing Kernel -->
+      <g transform="translate(0, 320)">
+        <rect width="405" height="166" rx="8" fill="#070c17" stroke="#172338" stroke-width="1"/>
+        
+        <path d="M 22 28 L 29 20 L 36 28 L 29 38 Z" fill="none" stroke="#c084fc" stroke-width="1.5"/>
+        <text x="46" y="30" fill="#f8fafc" font-size="13" font-weight="700">NPU Slicing Kernel</text>
+
+        <text x="22" y="60" fill="#94a3b8" font-size="11" line-height="1.5">
+          <tspan x="22" dy="0">M26 decision slicer utilizes fused float32 boundary comparison</tspan>
+          <tspan x="22" dy="20">tree with parallel bfloat16 register accumulation on AIE2 vector</tspan>
+          <tspan x="22" dy="20">tile.</tspan>
+        </text>
+
+        <rect x="22" y="112" width="120" height="24" rx="4" fill="#082f49"/>
+        <text x="32" y="128" fill="#38bdf8" font-size="10.5" font-weight="700" font-family="'JetBrains Mono'">1.85 MOPS/slice</text>
+
+        <rect x="152" y="112" width="110" height="24" rx="4" fill="#042f2e"/>
+        <text x="162" y="128" fill="#34d399" font-size="10.5" font-weight="700" font-family="'JetBrains Mono'">Bit-Accurate</text>
+      </g>
+    </g>
+  </g>
+</svg>

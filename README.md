@@ -16,7 +16,11 @@
 
 <br/>
 
-<img src="docs/assets/frontend_preview.svg" alt="Phoenix SDR-DSP Web Workbench and Silicon Regression Suite" width="100%" />
+<div align="center">
+  <img src="docs/assets/screenshot_constellation_evm.svg" alt="Phoenix SDR-DSP I/Q Constellation & EVM Analyzer" width="100%" />
+  <br/><br/>
+  <img src="docs/assets/screenshot_spectrum_waterfall.svg" alt="Phoenix SDR-DSP Real-Time Spectrum Analyzer & Waterfall Spectrogram" width="100%" />
+</div>
 
 <br/>
 
