@@ -1,0 +1,53 @@
+r"""Windows clean-clone launcher for the Phoenix SDR-DSP installer.
+
+Run ``py .\install`` from a repository clone. The launcher keeps the
+implementation in ``install.py`` and makes a normal full install run the
+canonical silicon regression automatically.
+"""
+
+from __future__ import annotations
+
+import runpy
+import sys
+from collections.abc import Sequence
+from pathlib import Path
+
+MAINTENANCE_OPTIONS = frozenset(
+    {
+        "--check-only",
+        "--download-only",
+        "--self-test",
+    }
+)
+
+
+def build_install_argv(argv: Sequence[str]) -> list[str]:
+    """Forward arguments and add the regression request for a full install."""
+
+    forwarded = list(argv)
+    is_maintenance_mode = any(arg in MAINTENANCE_OPTIONS for arg in forwarded)
+    if "--run-tests" not in forwarded and not is_maintenance_mode:
+        forwarded.append("--run-tests")
+    return forwarded
+
+
+def main(argv: Sequence[str] | None = None) -> int:
+    """Run the maintained installer as its command-line entry point."""
+
+    target = Path(__file__).with_name("install.py")
+    forwarded = build_install_argv(sys.argv[1:] if argv is None else argv)
+    original_argv = sys.argv
+    try:
+        sys.argv = [str(Path(__file__)), *forwarded]
+        runpy.run_path(
+            str(target),
+            run_name="__main__",
+            init_globals={"PHOENIX_INSTALL_LAUNCHER": True},
+        )
+    finally:
+        sys.argv = original_argv
+    return 0
+
+
+if __name__ == "__main__":
+    main()
