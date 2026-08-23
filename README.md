@@ -14,6 +14,12 @@
 ![I/Q: 7.46 Msps](https://img.shields.io/badge/I%2FQ-7.46%20Msps%20%C2%B7%2010%20TOPS%20NPU-ff6b00)
 [![CI](https://github.com/midhatn/phoenix-sdr-dsp/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/midhatn/phoenix-sdr-dsp/actions/workflows/ci.yml)
 
+<br/>
+
+<img src="docs/assets/frontend_preview.svg" alt="Phoenix SDR-DSP Web Workbench and Silicon Regression Suite" width="100%" />
+
+<br/>
+
 **Windows-native SDR/DSP and finite-field engineering corpus for AMD Ryzen AI Phoenix silicon (XDNA1 / AIE2)**
 
 **Built on [Xilinx XRT](https://github.com/Xilinx/XRT), [Xilinx MLIR-AIE](https://github.com/Xilinx/mlir-aie) / [IRON](https://xilinx.github.io/mlir-aie/1.4.1/buildHostWinNative/), and [LLVM Peano](https://github.com/Xilinx/llvm-aie).**
